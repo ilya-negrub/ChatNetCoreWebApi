@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e9539ea0-ea77-4699-bfcd-50d0695b453a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ApiEntity</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ChatMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClientConnectedCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClientDisconnectedCommand.cs" />
+    <Compile Include="..\ApiEntity\CommandApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SendMessageCommand.cs" />
+  </ItemGroup>
+</Project>

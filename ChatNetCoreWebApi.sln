@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatNetCoreWebApi", "ChatNetCoreWebApi\ChatNetCoreWebApi.csproj", "{60CFCB26-D08C-4474-957B-E1F586963E5A}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ApiEntity", "ApiEntity\ApiEntity.shproj", "{E9539EA0-EA77-4699-BFCD-50D0695B453A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientChat", "ClientChat\ClientChat.csproj", "{789622C7-7CCC-44B2-8AAD-4C284AE38286}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ApiEntity\ApiEntity.projitems*{e9539ea0-ea77-4699-bfcd-50d0695b453a}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60CFCB26-D08C-4474-957B-E1F586963E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60CFCB26-D08C-4474-957B-E1F586963E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60CFCB26-D08C-4474-957B-E1F586963E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60CFCB26-D08C-4474-957B-E1F586963E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{789622C7-7CCC-44B2-8AAD-4C284AE38286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789622C7-7CCC-44B2-8AAD-4C284AE38286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789622C7-7CCC-44B2-8AAD-4C284AE38286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789622C7-7CCC-44B2-8AAD-4C284AE38286}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4129A3C-5D0F-4D34-B11C-A734EE32A628}
+	EndGlobalSection
+EndGlobal
