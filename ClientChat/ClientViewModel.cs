@@ -36,6 +36,7 @@ namespace ClientChat
                     From = ApiClient.SelfId,
                     To = Id,
                     Message = Message,
+                    DateTime = DateTime.Now,
                 }
             };
 

@@ -14,7 +14,7 @@ namespace ClientChat
     internal static class ApiClient
     {
         private static bool isListening = false;
-        private static HttpClient httpClient = new HttpClient();
+        private static HttpClient httpClient;
         private static ObservableCollection<ClientViewModel> clients = new ObservableCollection<ClientViewModel>();
 
         public static bool IsListening => isListening;
@@ -24,8 +24,21 @@ namespace ClientChat
 
         static ApiClient()
         {
+            //const string certPath = @"C:\Users\ilya.negrub\Downloads\Certificate.cer";
+
+            //var handler = new HttpClientHandler
+            //{
+            //    ClientCertificateOptions = ClientCertificateOption.Manual,
+            //    SslProtocols = System.Security.Authentication.SslProtocols.Tls12
+            //};
+
+            //handler.ClientCertificates.Add(new System.Security.Cryptography.X509Certificates.X509Certificate2(certPath));
+
+            //httpClient = new HttpClient(handler);
+            httpClient = new HttpClient();
+
             httpClient.Timeout = TimeSpan.FromMilliseconds(System.Threading.Timeout.Infinite);
-            httpClient.BaseAddress = new Uri("http://localhost:5000");            
+            httpClient.BaseAddress = new Uri("https://localhost:5001");
         }
 
 

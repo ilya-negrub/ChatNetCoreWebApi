@@ -11,5 +11,7 @@ namespace ApiEntity
         public Guid To { get; set; }
 
         public string Message { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }

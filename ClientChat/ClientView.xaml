@@ -16,7 +16,7 @@
             <ImageBrush Stretch="UniformToFill" ImageSource="https://i.pinimg.com/originals/51/ed/c0/51edc046eb80046ee4755ee71d0f19ca.jpg"/>
         </Grid.Background>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Panel.ZIndex="9">
             <Grid Background="LightBlue" Opacity="0.5"/>
 
             <TextBlock Margin="10" HorizontalAlignment="Center">
@@ -33,22 +33,36 @@
                     <DataTemplate DataType="{x:Type local:MessageViewModel}">
                         <Border Background="CornflowerBlue"
                                 CornerRadius="5"
-                                Padding="5"
+                                Padding="5 0 5 5"
                                 Margin="5"
                                 HorizontalAlignment="Left">
                             <StackPanel>
-                                <TextBlock Text="{Binding FromName}" FontWeight="Bold"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding FromName}" FontWeight="Bold"/>
+                                    <Label Grid.Column="1" Content="{Binding ChatMessage.DateTime}" ContentStringFormat="{}{0:dd MMM yyyy (HH:mm)}"/>
+                                </Grid>
                                 <TextBlock Text="{Binding ChatMessage.Message}"/>
                             </StackPanel></Border>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type local:SelfMessageViewModel}">
                         <Border Background="CadetBlue"
                                 CornerRadius="5"
-                                Padding="5"
+                                Padding="5 0 5 5"
                                 Margin="5"
                                 HorizontalAlignment="Right">
                             <StackPanel>
-                                <TextBlock Text="{Binding FromName}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding FromName}" FontWeight="Bold"/>
+                                    <Label Grid.Column="1" Content="{Binding ChatMessage.DateTime}" ContentStringFormat="{}{0:dd MMM yyyy (HH:mm)}"/>
+                                </Grid>
                                 <TextBlock Text="{Binding ChatMessage.Message}"/>
                             </StackPanel>
                         </Border>
