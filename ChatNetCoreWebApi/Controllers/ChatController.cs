@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using ApiEntity;
-using Microsoft.AspNetCore.Http;
+﻿using ApiEntity;
+using ChatNetCoreWebApi.Services.Chat;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChatNetCoreWebApi.Controllers
 {
@@ -17,13 +12,19 @@ namespace ChatNetCoreWebApi.Controllers
     public class ChatController : ControllerBase
     {
 
-        private static ConcurrentBag<Client> clients = new ConcurrentBag<Client>();
+        IChatService chatService;
+
+        public ChatController(IChatService chatService)
+        {
+            this.chatService = chatService;
+        }
+
 
         // GET: api/Chat
         [HttpGet]
         public IEnumerable<ApiEntity.IClient> Get()
         {
-            return clients.Select(s => s as IClient);
+            return chatService.Clients.Select(s => s as IClient);
         }
 
         // GET: api/Chat
@@ -31,22 +32,14 @@ namespace ChatNetCoreWebApi.Controllers
         [Route("{guid}")]
         public IEnumerable<IClient> Get(Guid guid)
         {
-            return clients.Where(w => w.Id == guid).Select(s => s as IClient);
+            return chatService.Clients.Where(w => w.Id == guid).Select(s => s as IClient);
         }
 
         [HttpPost]
         [Route("Send")]
         public IActionResult Send(IEnumerable<ChatMessage> messages)
         {
-            foreach (var message in messages)
-            {
-                var client = clients.Where(w => w.Id == message.To).FirstOrDefault();
-                if (client != null)
-                {
-                    Task.Factory.StartNew(async () => { await client.SendMessage(message); });
-                }   
-            }
-
+            chatService.SendMessages(messages);
             return Ok();
         }
         
@@ -54,46 +47,9 @@ namespace ChatNetCoreWebApi.Controllers
         [Route("Subscribe/{name}")]
         public IActionResult Subscribe(string name)
         {
-            return new PushStreamResult<string>(OnStreamAvailable, "text/event-stream", HttpContext.RequestAborted, name);
+            return chatService.Subscribe(HttpContext, name);
         }
 
-        private async void OnStreamAvailable(Stream stream, CancellationToken requestAborted, string name)
-        {
-            var wait = requestAborted.WaitHandle;
-            var writer = new StreamWriter(stream);
-            var client = new Client(name, writer);
-            clients.Add(client);
-
-            //Send client created Id
-            await writer.WriteLineAsync(JsonConvert.SerializeObject(client.Id));
-            await writer.FlushAsync();
-
-            await ClientConnected(client);
-
-            wait.WaitOne();
-
-            Client ignore;
-            clients.TryTake(out ignore);
-
-            await ClientDisconnected(client);
-        }
-
-        private async Task ClientConnected(Client client)
-        {
-            //Send message all client
-            foreach (var item in clients.Where(w => w.Id != client.Id))
-            {
-                await item.Connected(client);
-            }
-        }
-
-        private async Task ClientDisconnected(Client client)
-        {
-            //Send message all client
-            foreach (var item in clients.Where(w => w.Id != client.Id))
-            {
-                await item.Disconnected(client);
-            }
-        }
+       
     }
 }

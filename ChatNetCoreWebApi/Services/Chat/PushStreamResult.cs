@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChatNetCoreWebApi
+namespace ChatNetCoreWebApi.Services.Chat
 {
     public class PushStreamResult<TPar> : IActionResult
     {

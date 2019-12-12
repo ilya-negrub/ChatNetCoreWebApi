@@ -24,17 +24,6 @@ namespace ClientChat
 
         static ApiClient()
         {
-            //const string certPath = @"C:\Users\ilya.negrub\Downloads\Certificate.cer";
-
-            //var handler = new HttpClientHandler
-            //{
-            //    ClientCertificateOptions = ClientCertificateOption.Manual,
-            //    SslProtocols = System.Security.Authentication.SslProtocols.Tls12
-            //};
-
-            //handler.ClientCertificates.Add(new System.Security.Cryptography.X509Certificates.X509Certificate2(certPath));
-
-            //httpClient = new HttpClient(handler);
             httpClient = new HttpClient();
 
             httpClient.Timeout = TimeSpan.FromMilliseconds(System.Threading.Timeout.Infinite);
